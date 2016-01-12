@@ -1,0 +1,82 @@
+<?php $issuesArray = $this->getSelections(); ?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="page-head">
+    <h3><?php echo Mage::helper('kayako')->__('Contact Us') ?></h3>
+</div>
+<form action="<?php echo $this->getUrl('kayako/index/submitTicket'); ?>" id="contactForm" method="post">
+    <fieldset class="group-select">
+        <h4 class="legend"><?php echo Mage::helper('kayako')->__('Contact Information') ?></h4>
+        <ul>
+            <li>
+                <div class="input-box">
+                    <label for="name"><?php echo Mage::helper('kayako')->__('Name') ?> <span class="required">*</span></label><br />
+                    <input name="name" id="name" title="<?php echo Mage::helper('kayako')->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="required-entry input-text" type="text" />
+                </div>
+                <div class="input-box">
+                    <label for="email"><?php echo Mage::helper('kayako')->__('Email') ?> <span class="required">*</span></label><br />
+                    <input name="email" id="email" title="<?php echo Mage::helper('kayako')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="required-entry input-text validate-email" type="text" />
+                </div>
+                <div class="input-box">
+                    <label for="subject"><?php echo Mage::helper('kayako')->__('Subject') ?> <span class="required">*</span></label><br />
+                    <input name="subject" id="subject" title="<?php echo Mage::helper('kayako')->__('Subject') ?>" value="" class="required-entry input-text" type="text" />
+                </div>
+                <div class="input-box">
+                    <label for="issue"><?php echo Mage::helper('kayako')->__('Issue') ?> <span class="required">*</span></label><br />
+                    <select name="issue" id="issue" title="<?php echo $this->__('Issue') ?>" class="validate-select">
+                        <?php foreach ($issuesArray as $issue): ?>
+                            <option value="<?php echo $issue['id'] ?>"><?php echo $issue['title'] ?></option>
+                        <?php endforeach; ?>
+                       
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <div class="input-box">
+                    <label for="comment"><?php echo Mage::helper('kayako')->__('Comment') ?></label><br />
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('kayako')->__('Comment') ?>" class="required-entry input-text" style="height:150px;width:525px;" cols="50" rows="5"></textarea>
+                </div>
+            </li>
+        </ul>
+    </fieldset>
+    <?php if (Mage::helper('kayako')->isCaptchaEnabled()) : ?>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha" data-sitekey="<?php echo Mage::helper('kayako')->getCaptchaSiteKey() ?>"></div>
+        <!--[if lte IE 8]>
+          <div style="width: 302px; height: 352px;">
+            <div style="width: 302px; height: 352px; position: relative;">
+              <div style="width: 302px; height: 352px; position: absolute;">
+                <iframe src="https://www.google.com/recaptcha/api/fallback?k=<?php echo Mage::Helper('kayako')->getCaptchaSiteKey() ?>"
+                        frameborder="0" scrolling="no"
+                        style="width: 302px; height:352px; border-style: none;">
+                </iframe>
+              </div>
+              <div style="width: 250px; height: 80px; position: absolute; border-style: none;
+                          bottom: 21px; left: 25px; margin: 0px; padding: 0px; right: 25px;">
+                <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                          class="g-recaptcha-response"
+                          style="width: 250px; height: 80px; border: 1px solid #c1c1c1;
+                                 margin: 0px; padding: 0px; resize: none;" value="">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        <![endif]-->
+    <?php endif; ?>
+    <div class="button-set">
+        <p class="required"><?php echo Mage::helper('kayako')->__('* Required Fields') ?></p>
+        <button class="form-button" type="submit"><span><?php echo Mage::helper('kayako')->__('Submit') ?></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    var contactForm = new VarienForm('contactForm', true);
+
+    $j('#contactForm').submit(function(){
+        $j('button[type=submit]', this).attr('disabled', true);
+
+        if (contactForm.validator.validate()) {
+            return true;
+        } else {
+            $j('button[type=submit]', this).attr('disabled', false);
+            return false;
+        }
+    });
+</script>
