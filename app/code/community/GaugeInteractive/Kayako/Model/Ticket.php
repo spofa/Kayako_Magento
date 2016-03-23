@@ -52,13 +52,12 @@ class GaugeInteractive_Kayako_Model_Ticket extends Varien_Object
 
     public function retrieveIssues()
     {
-        $ticket_types = kyTicketType::getAll()->filterByType(kyTicketType::TYPE_PUBLIC);
+        $ticket_types = kyTicketType::getAll();
 
         foreach ($ticket_types as $ticket_type) {
-            $selected = false;
             $issuesArray[] = array(
-                "id" => $ticket_type->getId(),
-                "title" => $ticket_type->getTitle()
+                'value' => $ticket_type->getId(),
+                'label' => $ticket_type->getTitle()
             );
         }
 

@@ -24,7 +24,7 @@
                     <label for="issue"><?php echo Mage::helper('kayako')->__('Issue') ?> <span class="required">*</span></label><br />
                     <select name="issue" id="issue" title="<?php echo $this->__('Issue') ?>" class="validate-select">
                         <?php foreach ($issuesArray as $issue): ?>
-                            <option value="<?php echo $issue['id'] ?>"><?php echo $issue['title'] ?></option>
+                            <option value="<?php echo $issue['value'] ?>"><?php echo $issue['label'] ?></option>
                         <?php endforeach; ?>
                        
                     </select>
