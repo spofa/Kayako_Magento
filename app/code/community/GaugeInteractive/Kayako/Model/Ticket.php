@@ -52,15 +52,20 @@ class GaugeInteractive_Kayako_Model_Ticket extends Varien_Object
 
     public function retrieveIssues()
     {
-        $ticket_types = kyTicketType::getAll();
+        try {
+            $ticket_types = kyTicketType::getAll();
 
-        foreach ($ticket_types as $ticket_type) {
-            $issuesArray[] = array(
-                'value' => $ticket_type->getId(),
-                'label' => $ticket_type->getTitle()
-            );
+            foreach ($ticket_types as $ticket_type) {
+                $issuesArray[] = array(
+                    'value' => $ticket_type->getId(),
+                    'label' => $ticket_type->getTitle()
+                );
+            }
+
+            return $issuesArray;
+        } catch (Exception $e) {
+            Mage::getSingleton('core/session')->addError('Error: Please check Kayako API credentials');
+            return array();
         }
-
-        return $issuesArray;
     }
 }

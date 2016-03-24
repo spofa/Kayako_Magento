@@ -8,6 +8,10 @@ class GaugeInteractive_Kayako_Model_Adminhtml_System_Config_Source_Issues
      */
     public function toOptionArray()
     {
-        return Mage::getModel('kayako/ticket')->retrieveIssues();
+        if (Mage::helper('kayako')->isKayakoEnabled()) {
+            return Mage::getModel('kayako/ticket')->retrieveIssues();
+        } else {
+            return array();
+        }
     }
 }
