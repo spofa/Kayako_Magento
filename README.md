@@ -6,7 +6,7 @@ The following form fields are editable by the user:
 * Name
 * Email
 * Subject
-* Issue - Issues are pulled dynamically from Kayako and filtered to show only public issues.
+* Issue
 * Comment
 
 The following fields are set automatically but could easily be added and pulled from Kayako as well:
@@ -20,6 +20,7 @@ System > Configuration > General > Contacts > Kayako
 * API URL - Obtained from Kayako
 * API Key - Obtained from Kayako
 * Secret Key - Obtained from Kayako
+* Issues - Issues are pulled from Kayako and can be selected
 * Enable reCAPTCHA - Enables form reCAPTCHA for contact from
 * reCAPTCHA Secret Key - Obtained from https://www.google.com/recaptcha/intro/index.html
 * reCAPTCHA Site Key - Obtained from https://www.google.com/recaptcha/intro/index.html
